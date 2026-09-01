@@ -6,6 +6,9 @@ import {
   toUIMessageStream,
   type UIMessage,
 } from "ai";
+import { db } from "@/db";
+import { conversation, message } from "@/db/schema";
+import { eq, asc } from "drizzle-orm";
 
 const SYSTEM_PROMPT = `
 You are an assistant on Oscar Öjling's personal site, answering questions
@@ -83,15 +86,68 @@ personality is good, this should sound like a person, not a CV read aloud.
 `;
 
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
+  const {
+    messages,
+    conversationId,
+  }: { messages: UIMessage[]; conversationId: string } = await req.json();
+
+  await db
+    .insert(conversation)
+    .values({ id: conversationId })
+    .onConflictDoNothing();
+
+  const lastMessage = messages[messages.length - 1];
+  if (lastMessage.role === "user") {
+    const text = lastMessage.parts
+      ?.filter((p) => p.type === "text")
+      .map((p) => p.text)
+      .join("");
+    await db.insert(message).values({
+      id: crypto.randomUUID(),
+      conversationId,
+      role: "user",
+      content: text ?? "",
+    });
+  }
 
   const result = streamText({
     model: anthropic("claude-haiku-4-5"),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages),
+    onFinish: async ({text}) => {
+      await db.insert(message).values({
+        id: crypto.randomUUID(),
+        conversationId,
+        role: "assistant",
+        content: text,
+      })
+    }
   });
 
   return createUIMessageStreamResponse({
     stream: toUIMessageStream({ stream: result.stream }),
   });
+}
+
+export async function GET(req: Request) {
+  const {searchParams} = new URL(req.url);
+  const conversationId = searchParams.get("conversationId")
+
+  if (!conversationId) {
+    return Response.json([])
+  }
+
+  const rows = await db
+  .select()
+  .from(message)
+  .where(eq(message.conversationId, conversationId))
+  .orderBy(asc(message.createdAt));
+
+  const UIMessages: UIMessage[] = rows.map((row) => ({
+    id: row.id,
+    role: row.role as "user" | "assistant",
+    parts: [{ type: "text", text: row.content}]
+  }))
+
+  return Response.json(UIMessages)
 }
