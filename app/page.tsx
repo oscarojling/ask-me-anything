@@ -1,13 +1,19 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
+import { useState } from "react";
+
+import { Conversation, ConversationContent, ConversationEmptyState } from "@/components/ai-elements/conversation";
+import { Message, MessageContent } from "@/components/ai-elements/message";
+import { PromptInput, PromptInputTextarea, PromptInputSubmit } from "@/components/ai-elements/prompt-input";
 
 export default function Home() {
+  const [input, setInput] = useState("")
   const { messages, sendMessage, status } = useChat();
+  const isLoading = status === "streaming" || status === "submitted"
   return (
     <main className="max-w-2xl mx-auto p-8">
       <h1 className="text-2xl font-semibold mb-4">Ask me anything</h1>
-
       <div className="mb-4 space-y-3">
         {messages.map((message) => (
           <div key={message.id}>
