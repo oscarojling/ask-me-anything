@@ -91,7 +91,10 @@ export default function Home() {
             rows={1}
             className="flex-1 text-lg"
           />
-          <PromptInputSubmit disabled={isLoading || !conversationId} suppressHydrationWarning />
+          <PromptInputSubmit
+            disabled={isLoading || !conversationId}
+            suppressHydrationWarning
+          />
         </PromptInput>
       </div>
     </div>

@@ -114,14 +114,14 @@ export async function POST(req: Request) {
     model: anthropic("claude-haiku-4-5"),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages),
-    onFinish: async ({text}) => {
+    onFinish: async ({ text }) => {
       await db.insert(message).values({
         id: crypto.randomUUID(),
         conversationId,
         role: "assistant",
         content: text,
-      })
-    }
+      });
+    },
   });
 
   return createUIMessageStreamResponse({
@@ -130,24 +130,24 @@ export async function POST(req: Request) {
 }
 
 export async function GET(req: Request) {
-  const {searchParams} = new URL(req.url);
-  const conversationId = searchParams.get("conversationId")
+  const { searchParams } = new URL(req.url);
+  const conversationId = searchParams.get("conversationId");
 
   if (!conversationId) {
-    return Response.json([])
+    return Response.json([]);
   }
 
   const rows = await db
-  .select()
-  .from(message)
-  .where(eq(message.conversationId, conversationId))
-  .orderBy(asc(message.createdAt));
+    .select()
+    .from(message)
+    .where(eq(message.conversationId, conversationId))
+    .orderBy(asc(message.createdAt));
 
   const UIMessages: UIMessage[] = rows.map((row) => ({
     id: row.id,
     role: row.role as "user" | "assistant",
-    parts: [{ type: "text", text: row.content}]
-  }))
+    parts: [{ type: "text", text: row.content }],
+  }));
 
-  return Response.json(UIMessages)
+  return Response.json(UIMessages);
 }
