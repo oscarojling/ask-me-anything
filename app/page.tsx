@@ -1,7 +1,9 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { UIMessage } from "ai";
+import { getConversationId } from "@/lib/session";
 
 import {
   Conversation,
@@ -21,13 +23,29 @@ import {
 
 export default function Home() {
   const [input, setInput] = useState("");
-  const { messages, sendMessage, status } = useChat();
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { messages, sendMessage, status, setMessages } = useChat();
+
   const isLoading = status === "streaming" || status === "submitted";
+
+  useEffect(() => {
+    const id = getConversationId();
+    setConversationId(id);
+
+    fetch(`/api/chat?conversationId=${id}`)
+      .then((res) => res.json())
+      .then((past: UIMessage[]) => {
+        if (past.length > 0) setMessages(past);
+        setIsLoaded(true);
+      });
+  }, [setMessages]);
+
   return (
     <div className="flex flex-col h-screen">
       <Conversation>
         <ConversationContent className="px-4 sm:px-6 max-w-2xl mx-auto w-full">
-          {messages.length === 0 ? (
+          {isLoaded && messages.length === 0 ? (
             <ConversationEmptyState
               title="Ask me anything"
               description="Questions about Oscar - background, skills, projects"
@@ -58,8 +76,8 @@ export default function Home() {
         <PromptInput
           onSubmit={(message, event) => {
             event.preventDefault();
-            if (message.text) {
-              sendMessage({ text: message.text });
+            if (message.text && conversationId) {
+              sendMessage({ text: message.text }, { body: { conversationId } });
               setInput("");
             }
           }}
@@ -73,7 +91,7 @@ export default function Home() {
             rows={1}
             className="flex-1 text-lg"
           />
-          <PromptInputSubmit disabled={isLoading} />
+          <PromptInputSubmit disabled={isLoading || !conversationId} suppressHydrationWarning />
         </PromptInput>
       </div>
     </div>
