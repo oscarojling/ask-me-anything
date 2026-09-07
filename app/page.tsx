@@ -43,6 +43,22 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen">
+      <header className="px-4 sm:px-6 pt-6 pb-2 max-w-2xl mx-auto w-full">
+        <div className="flex items-baseline justify-between">
+          <h1 className="font-display text-3xl tracking-tight">
+            Ask Oscar Anything
+          </h1>
+          <a
+            href="https://oscarojling.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+          >
+            Portfolio ↗
+          </a>
+        </div>
+        <div className="mt-2 h-px w-16 bg-primary" />
+      </header>
       <Conversation>
         <ConversationContent className="px-4 sm:px-6 max-w-2xl mx-auto w-full">
           {isLoaded && messages.length === 0 ? (
@@ -62,9 +78,16 @@ export default function Home() {
                         .join("")}
                     </MessageResponse>
                   ) : (
-                    message.parts?.map(
-                      (part) => part.type === "text" && part.text,
-                    )
+                    <span className="flex gap-2">
+                      <span className="font-display italic text-3xl text-primary leading-none select-none">
+                        &ldquo;
+                      </span>
+                      <span>
+                        {message.parts?.map(
+                          (part) => part.type === "text" && part.text,
+                        )}
+                      </span>
+                    </span>
                   )}
                 </MessageContent>
               </Message>
