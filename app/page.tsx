@@ -42,7 +42,7 @@ export default function Home() {
   }, [setMessages]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-dvh">
       <header className="px-4 sm:px-6 pt-6 pb-2 max-w-2xl mx-auto w-full">
         <div className="flex items-baseline justify-between">
           <h1 className="font-display text-3xl tracking-tight">
@@ -52,7 +52,7 @@ export default function Home() {
             href="https://oscarojling.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            className="text-sm text-muted-foreground visited:text-muted-foreground hover:text-primary visited:hover:text-primary transition-colors"
           >
             Portfolio ↗
           </a>
