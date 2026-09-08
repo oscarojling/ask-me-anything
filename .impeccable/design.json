@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-08T00:00:00Z",
+  "title": "Design System: Ask Oscar Anything",
+  "extensions": {
+    "colorMeta": {
+      "gold-leaf": {
+        "role": "primary",
+        "displayName": "Gold Leaf",
+        "canonical": "#b8823f",
+        "tonalRamp": ["#392814", "#644722", "#906631", "#bb8440", "#cca06a", "#dbbc95", "#ead7c1", "#f8f3ec"]
+      },
+      "forest-deep": {
+        "role": "neutral",
+        "displayName": "Forest Deep",
+        "canonical": "#12211d",
+        "tonalRamp": ["#1b322c", "#30574d", "#447d6e", "#59a38f", "#7db8a9", "#a3cdc2", "#c9e1db", "#eef6f4"]
+      },
+      "cream-paper": { "role": "neutral", "displayName": "Cream Paper", "canonical": "#f2ede1" },
+      "sage-muted-text": { "role": "neutral", "displayName": "Sage Muted Text", "canonical": "#8fa39a" },
+      "hairline-border": { "role": "neutral", "displayName": "Hairline Border", "canonical": "#2a3a31" },
+      "field-input": { "role": "neutral", "displayName": "Field Input", "canonical": "#23342b" },
+      "rust-destructive": { "role": "neutral", "displayName": "Rust Destructive", "canonical": "#b8493f" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display (Fraunces)", "purpose": "Page title and the visitor's own quoted question only." },
+      "body": { "displayName": "Body (Work Sans)", "purpose": "The assistant's voice and all interface chrome." }
+    },
+    "shadows": [],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (Submit)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The send/submit control at the end of the input bar. The only button with a filled background at rest.",
+      "html": "<button class=\"ds-btn-primary\" aria-label=\"Submit\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"9 10 4 15 9 20\"></polyline><path d=\"M20 4v7a4 4 0 0 1-4 4H4\"></path></svg></button>",
+      "css": ".ds-btn-primary { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; padding:0; border:none; border-radius:0.625rem; background:#b8823f; color:#12211d; cursor:pointer; transition:transform 0.15s, background 0.15s; } .ds-btn-primary:hover { background:#cca06a; } .ds-btn-primary:focus-visible { outline:none; box-shadow:0 0 0 3px rgba(184,130,63,0.5); } .ds-btn-primary:active { transform:translateY(1px); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Default button treatment for every action that isn't the primary send — nearly invisible at rest.",
+      "html": "<button class=\"ds-btn-ghost\">Portfolio</button>",
+      "css": ".ds-btn-ghost { display:inline-flex; align-items:center; gap:4px; padding:6px 10px; border:none; border-radius:0.625rem; background:transparent; color:#8fa39a; font-family:'Work Sans', sans-serif; font-size:0.875rem; cursor:pointer; transition:color 0.15s; } .ds-btn-ghost:hover { color:#f2ede1; } .ds-btn-ghost:focus-visible { outline:none; box-shadow:0 0 0 3px rgba(184,130,63,0.5); }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "The message textarea — barely distinct from the page at rest, gains a gold ring on focus.",
+      "html": "<div class=\"ds-input-group\"><textarea class=\"ds-input\" placeholder=\"Ask something about Oscar...\" rows=\"1\"></textarea></div>",
+      "css": ".ds-input-group { display:flex; align-items:center; width:100%; border:1px solid #2a3a31; border-radius:0.625rem; background:transparent; padding-right:0.375rem; } .ds-input { flex:1; resize:none; border:none; background:transparent; color:#f2ede1; font-family:'Work Sans', sans-serif; font-size:1.125rem; padding:0.5rem 0.625rem; outline:none; } .ds-input::placeholder { color:#8fa39a; } .ds-input-group:focus-within { border-color:#b8823f; box-shadow:0 0 0 3px rgba(184,130,63,0.5); }"
+    },
+    {
+      "name": "Visitor Quote (signature component)",
+      "kind": "custom",
+      "refersTo": "message-quote",
+      "description": "How a visitor's own question renders — an oversized gold serif quotation mark followed by italic serif text. The product's signature pattern.",
+      "html": "<div class=\"ds-quote\"><span class=\"ds-quote-mark\">&ldquo;</span><span class=\"ds-quote-text\">What's Oscar's favorite project?</span></div>",
+      "css": ".ds-quote { display:flex; gap:8px; align-items:flex-start; } .ds-quote-mark { font-family:'Fraunces', Georgia, serif; font-style:italic; font-size:1.875rem; line-height:1; color:#b8823f; user-select:none; } .ds-quote-text { font-family:'Fraunces', Georgia, serif; font-style:italic; font-size:1.25rem; color:#f2ede1; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Field Journal",
+    "overview": "This is a naturalist's field notebook, not a SaaS chat widget: deep forest green stands in for a well-worn cover, warm gold leaf marks the parts worth noticing, and cream text sits on the page like ink. The whole interface is built around a single conceit — a visitor's question renders as a quoted, hand-annotated line in the margin (large italic serif, a real curly quotation mark in gold), and Oscar's answer reads back as plain typed text underneath. There is no bubble, no card, no shadow anywhere in the product; the page is genuinely flat, and the only structure comes from thin 1px gold or hairline-green rules, used the way a journal uses a ruled line rather than a box.\n\nThe palette and type pairing (serif display italics against a clean geometric sans body) both do real work: the serif quote marks the question as something personal and human-authored, while the sans-serif answer reads as considered, typed, deliberate. Nothing here should ever read as a typical AI-chat product — no rounded bubble columns, no avatar icons, no card elevation, no bright SaaS blue.",
+    "keyCharacteristics": [
+      "Flat by default — zero shadows, zero card backgrounds, anywhere in the product",
+      "One accent color (gold), used sparingly and only with intent",
+      "Serif italics exclusively mark the visitor's own words; the assistant's voice is always the plain sans body",
+      "Structure comes from thin hairline rules, never boxes or borders-as-containers",
+      "Generous negative space; the page breathes like a printed page, not a dense app shell"
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Gold appears in small, precise strokes only — a 1px rule, a glyph, a ring — never as a fill covering more than a button.", "section": "colors" },
+      { "name": "The Flat Ledger Rule", "body": "No box-shadow appears anywhere in this product. Depth and grouping come only from color contrast and hairline rules, never elevation.", "section": "colors" },
+      { "name": "The One Voice Rule", "body": "Only a visitor's own words ever appear in the italic serif quote treatment. The assistant's voice is never italicized and never rendered as a quote.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces never lift. A hairline divider is the only separator this product uses.", "section": "elevation" },
+      { "name": "The Quiet Button Rule", "body": "Every button that isn't the primary send action stays nearly invisible until interacted with — restraint is the point, not a lesser treatment.", "section": "components" },
+      { "name": "The Header Rule", "body": "The header never gains a background, border-box, or shadow of its own; it is typography and one hairline, nothing else.", "section": "components" }
+    ],
+    "dos": [
+      "Do keep gold leaf rare — a rule, a ring, a glyph, one filled button.",
+      "Do render any user-authored text in italic Fraunces; keep every system/assistant voice in plain Work Sans.",
+      "Do use a 1px hairline as the only separator between regions — never a box, card, or shadow.",
+      "Do keep the reading column narrow (max-w-2xl) even as new features are added."
+    ],
+    "donts": [
+      "Don't add a chat-bubble treatment, avatar icons, or card backgrounds to messages.",
+      "Don't introduce a second accent color or a bright/saturated blue.",
+      "Don't add box-shadows, drop-shadows, or any elevation effect anywhere in the product."
+    ]
+  }
+}
