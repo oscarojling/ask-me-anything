@@ -3,6 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { useEffect, useState } from "react";
 import { UIMessage } from "ai";
+import { ArrowUpRight } from "lucide-react";
 import { getConversationId } from "@/lib/session";
 
 import {
@@ -52,9 +53,10 @@ export default function Home() {
             href="https://oscarojling.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-muted-foreground visited:text-muted-foreground hover:text-primary visited:hover:text-primary transition-colors"
+            className="inline-flex items-center gap-1 text-sm text-muted-foreground visited:text-muted-foreground hover:text-primary visited:hover:text-primary transition-colors"
           >
-            Portfolio ↗
+            Portfolio
+            <ArrowUpRight className="size-3.5" />
           </a>
         </div>
         <div className="mt-2 h-px w-16 bg-primary" />
