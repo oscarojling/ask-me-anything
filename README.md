@@ -8,8 +8,6 @@ A chatbot that answers questions about me directly, so instead of digging throug
 
 A Claude model answers your question, streamed in as it's generated, using a system prompt I wrote with real facts about myself. I told it explicitly not to make anything up. If it doesn't know something, it says so and points you to me instead of guessing.
 
-Every conversation gets saved to a Postgres database, and I've got a small password protected `/admin` page where I can read back through what people have asked.
-
 ## Built with
 
 - [Next.js](https://nextjs.org) (App Router) + React + TypeScript
