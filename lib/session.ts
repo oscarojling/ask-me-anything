@@ -1,8 +1,12 @@
 export function getConversationId(): string {
-  const existing = localStorage.getItem("conversation-id");
-  if (existing) return existing;
+  try {
+    const existing = localStorage.getItem("conversation-id");
+    if (existing) return existing;
 
-  const newId = crypto.randomUUID();
-  localStorage.setItem("conversation-id", newId);
-  return newId;
+    const newId = crypto.randomUUID();
+    localStorage.setItem("conversation-id", newId);
+    return newId;
+  } catch {
+    return crypto.randomUUID();
+  }
 }

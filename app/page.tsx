@@ -10,6 +10,7 @@ import {
   Conversation,
   ConversationContent,
   ConversationEmptyState,
+  ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
 import {
   Message,
@@ -26,7 +27,8 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const { messages, sendMessage, status, setMessages } = useChat();
+  const { messages, sendMessage, status, stop, regenerate, setMessages } =
+    useChat();
 
   const isLoading = status === "streaming" || status === "submitted";
 
@@ -63,7 +65,13 @@ export default function Home() {
       </header>
       <Conversation>
         <ConversationContent className="px-4 sm:px-6 max-w-2xl mx-auto w-full">
-          {isLoaded && messages.length === 0 ? (
+          {!isLoaded ? (
+            <div className="flex size-full items-center justify-center p-8">
+              <span className="text-sm text-muted-foreground animate-pulse">
+                Loading…
+              </span>
+            </div>
+          ) : messages.length === 0 ? (
             <ConversationEmptyState
               title="Ask me anything"
               description="Questions about Oscar - background, skills, projects"
@@ -81,7 +89,10 @@ export default function Home() {
                     </MessageResponse>
                   ) : (
                     <span className="flex gap-2">
-                      <span className="font-display italic text-3xl text-primary leading-none select-none">
+                      <span
+                        aria-hidden="true"
+                        className="font-display italic text-3xl text-primary leading-none select-none"
+                      >
                         &ldquo;
                       </span>
                       <span>
@@ -95,7 +106,32 @@ export default function Home() {
               </Message>
             ))
           )}
+          {status === "submitted" && (
+            <p
+              role="status"
+              aria-label="Oscar is answering"
+              className="text-lg text-muted-foreground animate-pulse"
+            >
+              …
+            </p>
+          )}
+          {status === "error" && (
+            <p className="text-base text-muted-foreground">
+              That didn&apos;t send — the connection dropped.{" "}
+              <button
+                type="button"
+                onClick={() =>
+                  conversationId && regenerate({ body: { conversationId } })
+                }
+                className="text-primary hover:underline underline-offset-4"
+              >
+                Try again
+              </button>
+              , or reach Oscar directly through the portfolio link above.
+            </p>
+          )}
         </ConversationContent>
+        <ConversationScrollButton />
       </Conversation>
       <div className="border-t p-3 sm:p-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <PromptInput
@@ -117,7 +153,9 @@ export default function Home() {
             className="flex-1 text-lg"
           />
           <PromptInputSubmit
-            disabled={isLoading || !conversationId}
+            disabled={!conversationId}
+            status={status}
+            onStop={stop}
             suppressHydrationWarning
           />
         </PromptInput>
