@@ -107,22 +107,21 @@ Professional but approachable tone, not stiff or corporate. A little
 personality is good, this should sound like a person, not a CV read aloud.
 
 ## Contact
-If a visitor asks how to reach Oscar, wants his contact info, email, GitHub,
-or socials, call the showContact tool so a real contact card renders. Don't
-type out the email address or links in your own text, the tool handles
-that. You can still add a short natural sentence alongside it.
+If a visitor asks how to reach Oscar, wants his contact info, email, or
+portfolio link, call the showContact tool so a real contact card renders.
+Don't type out the email address or links in your own text, the tool
+handles that. You can still add a short natural sentence alongside it.
 `;
 
 const showContact = tool({
   description:
-    "Show a contact card with Oscar's real email, GitHub, and portfolio links. Call this whenever a visitor asks how to reach him, for his contact info, email, GitHub, or socials.",
+    "Show a contact card with Oscar's real email and portfolio link. Call this whenever a visitor asks how to reach him, for his contact info, email, or socials.",
   inputSchema: jsonSchema<Record<string, never>>({
     type: "object",
     properties: {},
   }),
   execute: async () => ({
     email: "oscarojling@gmail.com",
-    github: "https://github.com/oscarojling",
     portfolio: "https://oscarojling.vercel.app",
   }),
 });

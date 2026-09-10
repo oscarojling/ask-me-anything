@@ -8,12 +8,6 @@ const CONTACT_LINKS = [
     icon: Mail,
   },
   {
-    label: "GitHub",
-    href: "https://github.com/oscarojling",
-    display: "github.com/oscarojling",
-    icon: ArrowUpRight,
-  },
-  {
     label: "Portfolio",
     href: "https://oscarojling.vercel.app",
     display: "oscarojling.vercel.app",
