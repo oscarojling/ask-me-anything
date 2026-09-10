@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { UIMessage } from "ai";
 import { ArrowUpRight } from "lucide-react";
 import { getConversationId } from "@/lib/session";
+import { ContactCard } from "@/components/contact-card";
 
 import {
   Conversation,
@@ -81,12 +82,24 @@ export default function Home() {
               <Message key={message.id} from={message.role}>
                 <MessageContent className="text-lg leading-relaxed">
                   {message.role === "assistant" ? (
-                    <MessageResponse>
-                      {message.parts
-                        ?.filter((part) => part.type === "text")
-                        .map((part) => part.text)
-                        .join("")}
-                    </MessageResponse>
+                    <>
+                      {message.parts?.map((part, index) => {
+                        if (part.type === "text") {
+                          return (
+                            <MessageResponse key={index}>
+                              {part.text}
+                            </MessageResponse>
+                          );
+                        }
+                        if (
+                          part.type === "tool-showContact" &&
+                          part.state === "output-available"
+                        ) {
+                          return <ContactCard key={part.toolCallId} />;
+                        }
+                        return null;
+                      })}
+                    </>
                   ) : (
                     <span className="flex gap-2">
                       <span
