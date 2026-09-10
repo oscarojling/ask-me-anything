@@ -158,18 +158,28 @@ export async function POST(req: Request) {
     messages: await convertToModelMessages(messages, { tools: { showContact } }),
     tools: { showContact },
     stopWhen: stepCountIs(3),
-    onFinish: async ({ text }) => {
-      await db.insert(message).values({
-        id: crypto.randomUUID(),
-        conversationId,
-        role: "assistant",
-        content: text,
-      });
-    },
   });
 
   return createUIMessageStreamResponse({
-    stream: toUIMessageStream({ stream: result.stream }),
+    stream: toUIMessageStream({
+      stream: result.stream,
+      // Persist the full response message (text + any tool parts, like the
+      // contact card) so it survives a page reload, not just the plain text.
+      onEnd: async ({ responseMessage }) => {
+        const text = responseMessage.parts
+          .filter((p) => p.type === "text")
+          .map((p) => p.text)
+          .join("");
+
+        await db.insert(message).values({
+          id: crypto.randomUUID(),
+          conversationId,
+          role: "assistant",
+          content: text,
+          parts: responseMessage.parts,
+        });
+      },
+    }),
   });
 }
 
@@ -190,7 +200,11 @@ export async function GET(req: Request) {
   const UIMessages: UIMessage[] = rows.map((row) => ({
     id: row.id,
     role: row.role as "user" | "assistant",
-    parts: [{ type: "text", text: row.content }],
+    // Older rows saved before the `parts` column existed only have
+    // `content`, so fall back to reconstructing a plain text part for those.
+    parts: (row.parts as UIMessage["parts"] | null) ?? [
+      { type: "text", text: row.content },
+    ],
   }));
 
   return Response.json(UIMessages);

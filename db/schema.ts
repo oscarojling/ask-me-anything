@@ -1,5 +1,5 @@
 import { embed } from "ai";
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, jsonb } from "drizzle-orm/pg-core";
 import { userAgent } from "next/server";
 
 export const conversation = pgTable("conversation", {
@@ -14,6 +14,10 @@ export const message = pgTable("message", {
     .references(() => conversation.id, { onDelete: "cascade" }),
   role: text("role").notNull(),
   content: text("content").notNull(),
+  // Full UIMessage parts (text + tool parts, e.g. the contact card), so
+  // things like the contact card survive a page reload. Nullable because
+  // rows saved before this column existed only have `content`.
+  parts: jsonb("parts"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
