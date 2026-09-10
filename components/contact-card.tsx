@@ -8,6 +8,12 @@ const CONTACT_LINKS = [
     icon: Mail,
   },
   {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/oscar-%C3%B6jling-806216257/",
+    display: "linkedin.com/in/oscar-öjling",
+    icon: ArrowUpRight,
+  },
+  {
     label: "Portfolio",
     href: "https://oscarojling.vercel.app",
     display: "oscarojling.vercel.app",
