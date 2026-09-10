@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { message } from "@/db/schema";
 import { eq, asc } from "drizzle-orm";
 import { LoginForm } from "../login-form";
+import Link from "next/link";
 
 export default async function ConversationPage({
   params,
@@ -25,13 +26,21 @@ export default async function ConversationPage({
 
   return (
     <div className="max-w-2xl mx-auto p-8">
-      <a href="/admin" className="text-sm text-blue-600">
+      <Link href="/admin" className="text-sm text-blue-600">
         ← Back
-      </a>
+      </Link>
       <div className="flex flex-col gap-4 mt-6">
         {messages.map((m) => (
           <div key={m.id}>
-            <p className="text-xs text-gray-400 mb-1">{m.role}</p>
+            <p className="text-xs text-gray-400 mb-1">
+              {m.role}
+              {" · "}
+              {new Date(m.createdAt).toLocaleString("sv-SE", {
+                timeZone: "Europe/Stockholm",
+                dateStyle: "short",
+                timeStyle: "short",
+              })}
+            </p>
             <p className="text-sm">{m.content}</p>
           </div>
         ))}

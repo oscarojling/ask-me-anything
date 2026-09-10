@@ -35,7 +35,11 @@ export default async function AdminPage() {
             className="border rounded px-4 py-3 hover:bg-gray-50 flex justify-between"
           >
             <span className="text-sm text-gray-500">
-              {new Date(c.createdAt).toLocaleString()}
+              {new Date(c.createdAt).toLocaleString("sv-SE", {
+                timeZone: "Europe/Stockholm",
+                dateStyle: "short",
+                timeStyle: "short",
+              })}
             </span>
             <span className="text-sm">{c.messageCount} messages</span>
           </Link>
