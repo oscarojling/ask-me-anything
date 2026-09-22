@@ -14,9 +14,6 @@ export const message = pgTable("message", {
     .references(() => conversation.id, { onDelete: "cascade" }),
   role: text("role").notNull(),
   content: text("content").notNull(),
-  // Full UIMessage parts (text + tool parts, e.g. the contact card), so
-  // things like the contact card survive a page reload. Nullable because
-  // rows saved before this column existed only have `content`.
   parts: jsonb("parts"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });

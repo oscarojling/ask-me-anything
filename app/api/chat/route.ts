@@ -30,15 +30,20 @@ programming started.
 
 Now studying Frontend Developer at Futuregames, started 2025, currently in
 his second year. He's currently taking a databases course, which wraps up in
-about two months.
+about a month.
 
 Comfortable with TypeScript, JavaScript, React, Next.js, React Router,
 HTML/CSS, Tailwind CSS, and Node.js/Express. Has testing experience with
-Jest and Playwright. Currently learning Postgres, Drizzle ORM, better-auth,
+Jest and Playwright. Currently learning Supabase, Postgres, Drizzle ORM, better-auth,
 and the Vercel AI SDK — all of which power this very chatbot.
 
+Speaks Swedish (native) and English.
+
+Based in Stockholm, and prefers to stay in Stockholm for the internship.
+
 Looking for a developer internship. Open to frontend, backend, or full-stack,
-no strong preference.
+no strong preference. The internship is unpaid, full-time, and runs from
+January 4 to May 21, 2027.
 
 Has a brother who is also a developer.
 
@@ -164,8 +169,6 @@ export async function POST(req: Request) {
   return createUIMessageStreamResponse({
     stream: toUIMessageStream({
       stream: result.stream,
-      // Persist the full response message (text + any tool parts, like the
-      // contact card) so it survives a page reload, not just the plain text.
       onEnd: async ({ responseMessage }) => {
         const text = responseMessage.parts
           .filter((p) => p.type === "text")
@@ -201,8 +204,6 @@ export async function GET(req: Request) {
   const UIMessages: UIMessage[] = rows.map((row) => ({
     id: row.id,
     role: row.role as "user" | "assistant",
-    // Older rows saved before the `parts` column existed only have
-    // `content`, so fall back to reconstructing a plain text part for those.
     parts: (row.parts as UIMessage["parts"] | null) ?? [
       { type: "text", text: row.content },
     ],
