@@ -125,6 +125,11 @@ LinkedIn, or portfolio link, call the showContact tool so a real contact
 card renders. Don't type out the email address or links in your own text,
 the tool handles that. You can still add a short natural sentence alongside
 it.
+
+## CV
+If a visitor asks for Oscar's CV, resume, or a downloadable version of his
+background, call the showCV tool so a real download card renders, instead
+of typing out a link yourself.
 `;
 
 const showContact = tool({
@@ -138,6 +143,19 @@ const showContact = tool({
     email: "oscarojling@gmail.com",
     linkedin: "https://www.linkedin.com/in/oscar-%C3%B6jling-806216257/",
     portfolio: "https://oscarojling.vercel.app",
+  }),
+});
+
+const showCV = tool({
+  description:
+    "Show a card with links to download Oscar's real CV, in Swedish and English. Call this whenever a visitor asks for his CV, resume, or a downloadable version of his background.",
+  inputSchema: jsonSchema<Record<string, never>>({
+    type: "object",
+    properties: {},
+  }),
+  execute: async () => ({
+    cvSwedish: "/Oscar_Ojling_CV_SV.pdf",
+    cvEnglish: "/Oscar_Ojling_CV_EN.pdf",
   }),
 });
 
@@ -169,8 +187,10 @@ export async function POST(req: Request) {
   const result = streamText({
     model: anthropic("claude-haiku-4-5"),
     system: SYSTEM_PROMPT,
-    messages: await convertToModelMessages(messages, { tools: { showContact } }),
-    tools: { showContact },
+    messages: await convertToModelMessages(messages, {
+      tools: { showContact, showCV },
+    }),
+    tools: { showContact, showCV },
     stopWhen: stepCountIs(3),
   });
 

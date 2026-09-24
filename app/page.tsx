@@ -6,6 +6,7 @@ import { UIMessage } from "ai";
 import { ArrowUpRight } from "lucide-react";
 import { getConversationId } from "@/lib/session";
 import { ContactCard } from "@/components/contact-card";
+import { CVCard } from "@/components/cv-card";
 
 import {
   Conversation,
@@ -96,6 +97,12 @@ export default function Home() {
                           part.state === "output-available"
                         ) {
                           return <ContactCard key={part.toolCallId} />;
+                        }
+                        if (
+                          part.type === "tool-showCV" &&
+                          part.state === "output-available"
+                        ) {
+                          return <CVCard key={part.toolCallId} />;
                         }
                         return null;
                       })}
