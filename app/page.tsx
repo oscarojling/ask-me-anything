@@ -3,8 +3,8 @@
 import { useChat } from "@ai-sdk/react";
 import { useEffect, useState } from "react";
 import { UIMessage } from "ai";
-import { ArrowUpRight } from "lucide-react";
-import { getConversationId } from "@/lib/session";
+import { ArrowUpRight, RotateCcw } from "lucide-react";
+import { getConversationId, startNewConversation } from "@/lib/session";
 import { ContactCard } from "@/components/contact-card";
 import { CVCard } from "@/components/cv-card";
 
@@ -34,6 +34,12 @@ export default function Home() {
 
   const isLoading = status === "streaming" || status === "submitted";
 
+  const handleNewConversation = () => {
+    const id = startNewConversation();
+    setConversationId(id);
+    setMessages([]);
+  };
+
   useEffect(() => {
     const id = getConversationId();
     setConversationId(id);
@@ -53,15 +59,26 @@ export default function Home() {
           <h1 className="font-display text-3xl tracking-tight">
             Ask Oscar Anything
           </h1>
-          <a
-            href="https://oscarojling.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-sm text-muted-foreground visited:text-muted-foreground hover:text-primary visited:hover:text-primary transition-colors"
-          >
-            Portfolio
-            <ArrowUpRight className="size-3.5" />
-          </a>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={handleNewConversation}
+              disabled={messages.length === 0}
+              className="inline-flex items-center gap-1.5 text-base text-muted-foreground hover:text-primary transition-colors disabled:opacity-40 disabled:pointer-events-none"
+            >
+              <RotateCcw className="size-4" />
+              New chat
+            </button>
+            <a
+              href="https://oscarojling.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-base text-muted-foreground visited:text-muted-foreground hover:text-primary visited:hover:text-primary transition-colors"
+            >
+              Portfolio
+              <ArrowUpRight className="size-4" />
+            </a>
+          </div>
         </div>
         <div className="mt-2 h-px w-16 bg-primary" />
       </header>

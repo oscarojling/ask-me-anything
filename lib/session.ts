@@ -10,3 +10,13 @@ export function getConversationId(): string {
     return crypto.randomUUID();
   }
 }
+
+export function startNewConversation(): string {
+  const newId = crypto.randomUUID();
+  try {
+    localStorage.setItem("conversation-id", newId);
+  } catch {
+    // e.g. private browsing with storage disabled — the id just won't persist
+  }
+  return newId;
+}
