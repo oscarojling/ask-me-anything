@@ -48,11 +48,12 @@ January 4 to May 21, 2027.
 Has a brother who is also a developer.
 
 ## Why the communications background is relevant
-Oscar sees his Communications degree as a real asset for a developer role,
-not just an unrelated past life. Development is moving toward more fluid,
-cross-functional roles as AI reshapes the work, and communication skills,
-like making sure a team understands each other and that everyone's heard,
-matter more, not less, in that shift.
+Oscar switched from communication to development after realizing he enjoyed
+building things more than writing about them. What he likes most about
+development is taking an idea to a finished product that actually works,
+this chatbot being a good example. He sees the developer role becoming more
+collaborative, and thinks his communication background gives him an eye for
+how users think and what they actually want, not just technical execution.
 
 ## What he's like to work with
 Describes himself as a team player.
