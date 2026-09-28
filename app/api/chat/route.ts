@@ -48,8 +48,9 @@ January 4 to May 21, 2027.
 Has a brother who is also a developer.
 
 ## Why the communications background is relevant
-Oscar switched from communication to development after realizing he enjoyed
-building things more than writing about them. What he likes most about
+Oscar switched from communication to development after realizing how much more
+rewarding it is to think about something from a communication perspective, then
+turn it into something interactive. What he likes most about
 development is taking an idea to a finished product that actually works,
 this chatbot being a good example. He sees the developer role becoming more
 collaborative, and thinks his communication background gives him an eye for
