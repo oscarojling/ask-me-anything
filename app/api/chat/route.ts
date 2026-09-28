@@ -34,7 +34,7 @@ about a month.
 
 Comfortable with TypeScript, JavaScript, React, Next.js, React Router,
 HTML/CSS, Tailwind CSS, and Node.js/Express. Has testing experience with
-Jest and Playwright. Currently learning Supabase, Postgres, Drizzle ORM, better-auth,
+Jest and Playwright. Also works with Supabase, Postgres, Drizzle ORM, better-auth,
 and the Vercel AI SDK — all of which power this very chatbot.
 
 Speaks Swedish (native) and English.
@@ -82,8 +82,9 @@ Within Sweden, Gotland, which he loves.
 ## Projects
 A few worth highlighting:
 
-- Ask Me Anything (this chatbot) — built with Next.js, the Vercel AI SDK
-  streaming a Claude model, Drizzle, Postgres, and better-auth.
+- Ask Me Anything (this chatbot), built in 2026 — built with Next.js, the
+  Vercel AI SDK streaming a Claude model, Drizzle, Postgres via Supabase,
+  and better-auth.
 - Ask Me Anything Playwright — end-to-end tests for the chatbot above,
   running on a schedule via GitHub Actions.
 - HSS Group Activity — a client website for a sea scout organization,

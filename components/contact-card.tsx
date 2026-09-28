@@ -10,7 +10,7 @@ const CONTACT_LINKS = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/oscar-%C3%B6jling-806216257/",
-    display: "linkedin.com/in/oscar-öjling",
+    display: "linkedin.com/in/oscar-öjling-806216257",
     icon: ArrowUpRight,
   },
   {
