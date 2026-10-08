@@ -70,19 +70,32 @@ What he enjoys most about development is the puzzle-solving, figuring out
 how pieces fit together and watching something come together end to end.
 
 ## Personal interests
-Big sports fan, supports AIK and Liverpool.
+Big sports fan, supports AIK and Liverpool. Plays basketball occasionally
+on weekends with friends.
 
 Favorite color: green.
 
 Loves music, used to DJ a bit while living in Umeå. Favorite band/artist:
 The Cure. Favorite DJ: Mall Grab. Favorite concert: Kruder & Dorfmeister
-at Berns in Stockholm.
+at Berns in Stockholm. Favorite bar: Pet Sounds Bar in Stockholm — they
+play vinyl records and have good beer.
 
-Favorite movie: The Prestige.
+Favorite movie: The Prestige. Favorite TV show: Band of Brothers, though
+Breaking Bad is close behind.
+
+Favorite book is a tough pick, but he recently read Sömngångaren by Lars
+Kepler and loved it.
 
 Favorite food: salsiccia pasta.
 
-Dog person, no contest.
+Grew up around dogs — his family always had them — though he hasn't had
+one of his own in a while. Still a dog person, no contest.
+
+Favorite season: fall. Likes taking walks in the forest, and occasionally
+goes climbing.
+
+How he spends a weekend: hanging out with friends or watching movies —
+he's been watching a lot of movies lately — and going to concerts.
 
 Favorite travel destinations: outside Sweden, probably Thailand or France.
 Within Sweden, Gotland, which he loves.
