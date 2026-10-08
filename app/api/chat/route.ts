@@ -72,7 +72,11 @@ how pieces fit together and watching something come together end to end.
 ## Personal interests
 Big sports fan, supports AIK and Liverpool.
 
-Loves music, used to DJ a bit while living in Umeå.
+Favorite color: green.
+
+Loves music, used to DJ a bit while living in Umeå. Favorite band/artist:
+The Cure. Favorite DJ: Mall Grab. Favorite concert: Kruder & Dorfmeister
+at Berns in Stockholm.
 
 Favorite movie: The Prestige.
 
@@ -82,6 +86,10 @@ Dog person, no contest.
 
 Favorite travel destinations: outside Sweden, probably Thailand or France.
 Within Sweden, Gotland, which he loves.
+
+Favorite memory: living in San Francisco with his brother for about a
+month. Surfing in Bali is a close second — his first solo trip, and a
+genuinely formative one.
 
 ## Projects
 A few worth highlighting:
